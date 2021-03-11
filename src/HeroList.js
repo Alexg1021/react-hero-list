@@ -1,11 +1,6 @@
 const HeroListComponent = ({ heroes }) => {
-  const showDetails = event => {
-    event.preventDefault();
-    console.log(event);
+  const showDetails = heroId => {
     // debugger;
-
-    let heroId = +event.target.value;
-
     // find a hero from our array
     let foundHero = heroes.find(hero => hero.id === heroId);
     // alert details of that hero
@@ -23,18 +18,11 @@ const HeroListComponent = ({ heroes }) => {
           {heroes.map((hero, index) => {
             return (
               <li className='list-group-item' key={index}>
-                {/* <a
+                <a
                   href='javascript:void(0)'
-                  value={hero.id}
-                  onClick={showDetails}> */}
-                {hero.name}
-                {/* </a> */}
-                <button
-                  className='btn btn-primary'
-                  value={hero.id}
-                  onClick={showDetails}>
-                  Show Details
-                </button>
+                  onClick={() => showDetails(hero.id)}>
+                  {hero.name}
+                </a>
               </li>
             );
           })}

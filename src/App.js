@@ -1,5 +1,6 @@
 import HeadingComponent from './Heading';
 import HeroListComponent from './HeroList';
+import HeroFormComponent from './HeroForm';
 import './App.css';
 
 let heroes = [
@@ -39,6 +40,7 @@ const App = () => {
   return (
     <div className='container'>
       <HeadingComponent title={title} subTitle={subTitle} />
+      <HeroFormComponent />
       <HeroListComponent heroes={heroes} />
     </div>
   );
