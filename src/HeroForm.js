@@ -1,24 +1,42 @@
 import { useState } from 'react';
 
-const HeroFormComponent = () => {
+const HeroFormComponent = ({ addNewHero }) => {
   // initialize my variable and state hooks first
   const [heroName, setHeroName] = useState('');
-  //   let heroName = ''
+  const [heroPower, setHeroPower] = useState('');
+  const [heroUniverse, setHeroUniverse] = useState('');
+  const [heroCoolnessRating, setHeroCoolnessRating] = useState(5);
+  //   let heroName = '';
   //   const setHeroName = (value) => {
   //     //   updates heroName
   //     heroName += value;
   //   }
 
   // initialize my functions
-  const handleChange = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     // debugger;
-    console.log(event.target.value);
+    let newHero = {
+      name: heroName,
+      power: heroPower,
+      universe: heroUniverse,
+      coolnessRating: heroCoolnessRating,
+    };
+    console.log(newHero);
+    addNewHero(newHero);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    setHeroName('');
+    setHeroPower('');
+    setHeroUniverse('');
+    setHeroCoolnessRating(5);
   };
   return (
     <div className='row mb-5'>
       <div className='col-6 offset-3'>
-        <form action='submit' id='hero-form'>
+        <form action='submit' id='hero-form' onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='heroName'>Hero Name</label>
             <input
@@ -37,7 +55,10 @@ const HeroFormComponent = () => {
               type='text'
               className='form-control'
               id='heroPower'
-              value=''
+              value={heroPower}
+              onChange={event => {
+                setHeroPower(event.target.value);
+              }}
             />
           </div>
           <div className='row'>
@@ -47,16 +68,22 @@ const HeroFormComponent = () => {
                 type='text'
                 id='heroUniverse'
                 className='form-control'
-                value=''
+                value={heroUniverse}
+                onChange={event => {
+                  setHeroUniverse(event.target.value);
+                }}
               />
             </div>
             <div className='form-group col'>
               <label htmlFor='heroCoolnessRating'>Coolness</label>
               <input
-                type='text'
+                type='number'
                 className='form-control'
                 id='heroCoolnessRating'
-                value=''
+                value={heroCoolnessRating}
+                onChange={event => {
+                  setHeroCoolnessRating(event.target.value);
+                }}
               />
             </div>
           </div>
